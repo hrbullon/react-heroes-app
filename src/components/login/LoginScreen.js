@@ -1,9 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../auth/AuthContext'
+import { types } from '../../types/type'
 
-export const LoginScreen = ({ history }) => {
+export const LoginScreen = () => {
+
+  const navigate = useNavigate();
+  const { dispatch } = useContext(AuthContext)
   
   const handleClick = () => {
-    history.replace("/");
+
+    const path = localStorage.getItem("lastPath") || "/";
+
+    dispatch({
+      type: types.login,
+      payload: {
+        name: "Haderson Bullón"
+      }
+    });
+
+    navigate(path, { replace: true });
+
   }
   
   return (
